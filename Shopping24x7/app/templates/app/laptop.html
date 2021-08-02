@@ -6,16 +6,18 @@
  <div class="row">
   <div class="col-sm-3">
       <div class="list-group">
-          <a href="{% url 'mobile' %}" class="list-group-item list-group-item-action" aria="true">All Mobiles</a>
-          <a href="{% url 'mobiledata' 'Apple' %}" class="list-group-item list-group-item-action" aria="true">Apple</a>
-          <a href="{% url 'mobiledata' 'Samsung' %}" class="list-group-item list-group-item-action" aria="true">Samsung</a>
-          <a href="{% url 'mobiledata' 'Oneplus' %}" class="list-group-item list-group-item-action" aria="true">Oneplus</a>
+          <a href="{% url 'laptop' %}" class="list-group-item list-group-item-action" aria="true">All laptops</a>
+          <a href="{% url 'laptopdata' 'Apple' %}" class="list-group-item list-group-item-action" aria="true">Apple</a>
+          <a href="{% url 'laptopdata' 'ASUS' %}" class="list-group-item list-group-item-action" aria="true">Asus</a>
+          <a href="{% url 'laptopdata' 'Lenovo' %}" class="list-group-item list-group-item-action" aria="true">Lenovo</a>
+          <a href="{% url 'laptopdata' 'Microsoft' %}" class="list-group-item list-group-item-action" aria="true">Microsoft</a>
+
       </div>
-   <!-- Side Bar for Mobile filter -->
+   <!-- Side Bar for laptop filter -->
   </div>
   <div class="col-sm-8">
       <div class="row">
-          {% for product in mobiles %}
+          {% for product in laptops %}
           <div class="col-sm-6 text-center mb-4">
               <a href="{% url 'product-detail' product.id %}" class="btn">
                   <div class="item">
@@ -28,7 +30,7 @@
           </div> 
           {% endfor %}
       </div>
-   <!-- Mobile Product List -->
+   <!-- laptop Product List -->
   </div>
  </div>
 </div>

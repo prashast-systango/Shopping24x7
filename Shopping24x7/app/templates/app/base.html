@@ -20,16 +20,27 @@
 
 
     <title>Shopping24x7 | {% block title %} {% endblock title %} </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500&display=swap" rel="stylesheet">
+    <style>
+      .navbar-brand{
+        font-size: xx-large;
+        font-family: 'Barlow Condensed', sans-serif;
+      }
+    </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
      <div class="container">
-       <a class="navbar-brand" href="/">Shopping24x7</a>
+       <a class="navbar-brand text-danger" href="/">Shopping24x7</a>
        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
        <div class="collapse navbar-collapse" id="navbarSupportedContent">
          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if request.user.is_authenticated %}
+
            <li class="nav-item">
              <a class="nav-link active" aria-current="page" href="/">Home</a>
            </li>
@@ -39,10 +50,12 @@
              </a>
              <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
                <li><a class="dropdown-item" href="{% url 'mobile' %}">Mobile</a></li>
-               <li><a class="dropdown-item" href="#">Laptop</a></li>
+               <li><a class="dropdown-item" href="{% url 'laptop' %}">Laptop</a></li>
+               <li><a class="dropdown-item" href="{% url 'accessories' %}">Accessories</a></li>
+
              </ul>
            </li>
-           <li class="nav-item dropdown">
+           <!-- <li class="nav-item dropdown">
              <a class="nav-link dropdown-toggle text-white" href="#" id="fashionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                Fashion
              </a>
@@ -50,11 +63,11 @@
                <li><a class="dropdown-item" href="#">Top Wear</a></li>
                <li><a class="dropdown-item" href="#">Bottom Wear</a></li>
              </ul>
-           </li>
+           </li> -->
          </ul>
          <form class="d-flex">
            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-           <button class="btn btn-warning" type="submit">S</button>
+           <button class="btn btn-danger" type="submit"><img src="{% static 'app/images/search_black_24dp.svg' %}" alt="" srcset=""></button>
          </form>
          <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -66,18 +79,35 @@
                 <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                 <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
                 <li><a class="dropdown-item" href="{% url 'changepassword' %}">Change Password</a></li>
-                <li><a class="dropdown-item" href="#">Logout</a></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
               </ul>
             </li>
             <li class="nav-item mx-2">
-             <a href="{% url 'add-to-cart' %}" class="nav-link text-white"><span class="badge bg-danger">4</span> Cart </a>
+             <a href="{% url 'add-to-cart' %}" class="nav-link text-white"><span class="badge bg-danger text-dark">4</span>&nbsp;<img src="{% static 'app/images/shopping_cart_white_24dp.svg' %}" alt="" srcset=""></a>
             </li>
+          {% else %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="electronicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Electronics
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
+                <li><a class="dropdown-item" href="{% url 'mobile' %}">Mobile</a></li>
+                <li><a class="dropdown-item" href="{% url 'laptop' %}">Laptop</a></li>
+                <li><a class="dropdown-item" href="{% url 'accessories' %}">Accessories</a></li>
+
+              </ul>
+            </li>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-danger" type="submit"><img src="{% static 'app/images/search_black_24dp.svg' %}" alt="" srcset=""></button>
+            </form>
             <li class="nav-item mx-2">
-             <a href="{% url 'login' %}" class="nav-link text-white">Login</a>
+             <a href="{% url 'login' %}" class="nav-link text-white text-end">Login</a>
             </li>
             <li class="nav-item mx-2">
              <a href="{% url 'customerregistration' %}" class="nav-link text-white">Registration</a>
             </li>
+          {% endif %}
           </ul>
          </div>
        </div>
@@ -88,7 +118,7 @@
     {% block main-content %} {% endblock main-content %}
 
     <!-- Start Footer -->
-    <footer class="container-fluid bg-dark text-center p-2 mt-5">
+    <footer class="container-fluid bg-dark text-center p-2 mt-5 footer fixed-bottom">
         <small class="text-white">Copyright &copy; 2021 || Designed By Prashast || </small>
         <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
     </footer> <!-- End Footer -->
