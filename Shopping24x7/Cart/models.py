@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.base import Model
 from Partner.models import Product, Coupon
+from Shopping24x7.utils import TimeStamp
 from constants import *
+
 
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

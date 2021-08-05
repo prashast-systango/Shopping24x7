@@ -14,5 +14,4 @@ class Customer(models.Model):
     state = models.CharField(max_length=50, choices=STATE_CHOICES)
 
 
-    def __str__(self):
-        return str(self.id)
+    
