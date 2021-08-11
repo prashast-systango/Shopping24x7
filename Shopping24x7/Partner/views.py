@@ -1,3 +1,64 @@
+from django.shortcuts import render
+from django.views import View
+from .forms import AddProductsForm, AddEmployeeForm
+from django.contrib import messages
+from rest_framework import request
+from django.http import HttpResponse
+
+class PartnerHomeView(View):
+    def get(self, request):
+        return render(request, 'partner/partnerhome.html')
+
+
+class AddProductsView(View):
+    def get(self, request):
+        fm = AddProductsForm()
+        return render(request, 'partner/addproducts.html', {'form':fm})
+
+    def post(self, request):
+        fm = AddProductsForm(request.POST, request.FILES)
+        if fm.is_valid():
+            messages.success(request, 'Product Added Successfully !!')
+            fm.save()
+            # return render(request, 'partner/addproducts.html', {'form':fm})
+        return render(request, 'partner/addproducts.html', {'form':fm})
+        # return HttpResponse('success !!')
+        
+
+class AddEmployeeView(View):
+    def get(self, request):
+        fm = AddEmployeeForm()
+        return render(request, 'partner/addemployee.html', {'form':fm})
+
+    def post(self, request):
+        fm = AddEmployeeForm(request.POST)
+        if fm.is_valid():
+            messages.success(request, 'Product Added Successfully !!')
+            fm.save()
+            # return render(request, 'partner/addproducts.html', {'form':fm})
+        return render(request, 'partner/addemployee.html', {'form':fm})
+        
+
+
+
+# def addProductsView(request):
+#     fm = AddProductsForm()
+#     return render(request, 'partner/addproducts.html', {'form':fm})
+
+
+
+
+# class AddProductsViewTemp(View):
+#     if request.method == 'POST':
+#         fm = AddProductsForm(request.POST, request.FILES)
+#         if fm.is_valid():
+#             messages.success(request, 'Product Added Successfully !!')
+#             fm.save()
+
+
+
+
+
 # # pylint: disable=no-self-use
 # from django.shortcuts import render
 # from django.views import View

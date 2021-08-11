@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.base import Model
-from Partner.models import Product, Coupon
+from Partner.models import Coupon
+from Base.models import Product
 from Shopping24x7.utils import TimeStamp
 from constants import *
 

@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 # from .forms import CustomerLoginForm, MyPasswordChangeForm
 from Customer.forms import CustomerLoginForm, MyPasswordChangeForm
+from Partner import views as partnerViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -50,6 +51,19 @@ urlpatterns = [
      form_class=MyPasswordChangeForm, success_url='/passwordchangedone/'), name='changepassword'),
 
     path('passwordchangedone/', auth_views.PasswordChangeView.as_view(template_name='customer/passwordchangedone.html'), name='passwordchangedone'),
+
+
+    # partner home page
+    path('partner_home/', partnerViews.PartnerHomeView.as_view(), name='partner-home'),
+
+    # add products url
+    path('add_product/', partnerViews.AddProductsView.as_view(), name='product-add'),
+
+    # partner logout
+    path('partner_logout/', auth_views.LogoutView.as_view(next_page='/partner_home'), name='partner_logout'),
+
+    # add employee url
+    path('add_employee/', partnerViews.AddEmployeeView.as_view(), name='employee-add'),
 
 
     path('laptop/', customerViews.LaptopView.as_view(), name='laptop'),

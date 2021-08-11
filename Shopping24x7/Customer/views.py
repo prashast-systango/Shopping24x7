@@ -5,7 +5,8 @@ from django.shortcuts import render
 from django.views import View
 from Customer.forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
-from Partner.models import Product
+from Base.models import Product
+# from rest_framework.permissions import IsAuthenticated
 
 #     Customer,
 #     Product,

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from constants import *
-from Partner.models import Product
+from Base.models import Product
 from Customer.models import  Customer
 
 class OrderPlaced(models.Model):

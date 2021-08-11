@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import (
-    Product,
     Partner,
     Coupon,
     Location,
@@ -11,9 +10,9 @@ from .models import (
 # class CustomerModelAdmin(admin.ModelAdmin):
 #     list_display = ['id','user','name','locality','city','zipcode','state']
 
-@admin.register(Product)
-class ProductModelAdmin(admin.ModelAdmin):
-    list_display = ['id','title','selling_price','description','brand','category','product_image']
+# @admin.register(Product)
+# class ProductModelAdmin(admin.ModelAdmin):
+#     list_display = ['id','title','selling_price','description','brand','category','product_image']
 
 # @admin.register(Cart)
 # class CartModelAdmin(admin.ModelAdmin):
