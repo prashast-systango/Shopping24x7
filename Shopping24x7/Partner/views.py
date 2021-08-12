@@ -1,14 +1,31 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
-from .forms import AddProductsForm, AddEmployeeForm
+from .forms import AddProductsForm, CreateEmployeeForm, ProductsForm, EmployeesForm, AddCouponsForm
 from django.contrib import messages
 from rest_framework import request
 from django.http import HttpResponse
+from Base.models import Product
+from Employee.models import Employee
+from .models import Coupon
 
 class PartnerHomeView(View):
     def get(self, request):
         return render(request, 'partner/partnerhome.html')
 
+class ProductListView(View):
+    def get(self, request):
+        prod = Product.objects.all()
+        return render(request, 'partner/allproductslist.html', {'item':prod})
+
+class EmployeeListView(View):
+    def get(self, request):
+        emp = Employee.objects.all()
+        return render(request, 'partner/allemployeeslist.html', {'item':emp})
+
+class CouponListView(View):
+    def get(self, request):
+        coupon = Coupon.objects.all()
+        return render(request, 'partner/allemployeeslist.html', {'item':coupon})
 
 class AddProductsView(View):
     def get(self, request):
@@ -16,149 +33,79 @@ class AddProductsView(View):
         return render(request, 'partner/addproducts.html', {'form':fm})
 
     def post(self, request):
-        fm = AddProductsForm(request.POST, request.FILES)
+        fm = AddProductsForm(request.POST or None, request.FILES or None)
         if fm.is_valid():
             messages.success(request, 'Product Added Successfully !!')
             fm.save()
-            # return render(request, 'partner/addproducts.html', {'form':fm})
         return render(request, 'partner/addproducts.html', {'form':fm})
-        # return HttpResponse('success !!')
-        
+
+
+def editProductDetails(request, pk):
+    prod = Product.objects.get(id=pk)
+    form = ProductsForm(instance=prod)
+
+    if request.method == 'POST':
+        form = ProductsForm(request.POST, instance=prod)
+        if form.is_valid():
+            form.save()
+            return redirect('/all_products')
+
+    context = {'form':form}
+    return render(request, 'partner/editproductdetails.html', context)
+
+def deleteProduct(request, pk):
+    prod = Product.objects.get(id=pk)
+    if request.method == "POST":
+        prod.delete()
+        return redirect('/all_products')
+    
+    context = {'item':prod}
+    return render(request, 'partner/deleteproduct.html', context)
 
 class AddEmployeeView(View):
     def get(self, request):
-        fm = AddEmployeeForm()
+        fm = CreateEmployeeForm()
         return render(request, 'partner/addemployee.html', {'form':fm})
 
     def post(self, request):
-        fm = AddEmployeeForm(request.POST)
+        fm = CreateEmployeeForm(request.POST)
         if fm.is_valid():
             messages.success(request, 'Product Added Successfully !!')
             fm.save()
-            # return render(request, 'partner/addproducts.html', {'form':fm})
         return render(request, 'partner/addemployee.html', {'form':fm})
         
 
+def editEmployeeDetails(request, pk):
+    emp = Employee.objects.get(id=pk)
+    form = EmployeesForm(instance=emp)
+
+    if request.method == 'POST':
+        form = EmployeesForm(request.POST, instance=emp)
+        if form.is_valid():
+            form.save()
+            return redirect('/all_employees')
+
+    context = {'form':form}
+    return render(request, 'partner/editemployeedetails.html', context)
+
+def deleteEmployee(request, pk):
+    emp = Employee.objects.get(id=pk)
+    if request.method == "POST":
+        emp.delete()
+        return redirect('/all_employees')
+    
+    context = {'item':emp}
+    return render(request, 'partner/deleteemployee.html', context)
 
 
-# def addProductsView(request):
-#     fm = AddProductsForm()
-#     return render(request, 'partner/addproducts.html', {'form':fm})
+class AddCouponsView(View):
+    def get(self, request):
+        fm = AddCouponsForm()
+        return render(request, 'partner/addcoupon.html', {'form':fm})
 
-
-
-
-# class AddProductsViewTemp(View):
-#     if request.method == 'POST':
-#         fm = AddProductsForm(request.POST, request.FILES)
-#         if fm.is_valid():
-#             messages.success(request, 'Product Added Successfully !!')
-#             fm.save()
-
-
-
-
-
-# # pylint: disable=no-self-use
-# from django.shortcuts import render
-# from django.views import View
-# from Customer.forms import CustomerRegistrationForm
-# from django.contrib import messages
-# from .models import (
-#     Customer,
-#     Product,
-#     Cart,
-#     OrderPlaced,
-#     Partner,
-#     Coupon,
-#     Employee,
-#     Attendance,
-#     Location
-# )
-
-# class HomeView(View):
-#     def get(self, request):
-#         accessories = Product.objects.filter(category='AC')
-#         mobiles = Product.objects.filter(category='M')
-#         laptops = Product.objects.filter(category='L')
-#         return render(request, 'partner/home.html', {'accessories':accessories, 'mobiles':mobiles, 'laptops':laptops})
-
-# # def home(request):
-# #     return render(request, 'partner/home.html')
-
-# class ProductDetailView(View):
-#     def get(self, request, pk):
-#         product = Product.objects.get(pk=pk)
-#         return render(request, 'partner/productdetail.html', {'product':product})
-
-
-# # def product_detail(request):
-# #  return render(request, 'app/productdetail.html')
-# # (Oneplus,Samsung,Apple)
-# class MobileView(View):
-#     def get(self, request, data=None):
-#         if data == None or data == 'All Mobiles':
-#             mobiles = Product.objects.filter(category='M')
-#         elif data == 'Oneplus' or data == 'Samsung' or data == 'Apple':
-#             mobiles = Product.objects.filter(category='M').filter(brand=data)
-
-        
-#         return render(request, 'partner/mobile.html', {'mobiles':mobiles})
-        
-# class LaptopView(View):
-#     """This class is used for filtering laptops"""
-#     def get(self, request, data=None):
-#         if data == None or data == 'All Laptops':
-#             laptops = Product.objects.filter(category='L')
-#         elif data == 'ASUS' or data == 'Lenovo' or data == 'Apple' or data=='Microsoft':
-#             laptops = Product.objects.filter(category='L').filter(brand=data)
-
-        
-#         return render(request, 'partner/laptop.html', {'laptops':laptops})
-
-# class AccessoryView(View):
-#     def get(self, request, data=None):
-#         if data == None or data == 'All Accessories':
-#             accessories = Product.objects.filter(category='AC')      
-#         return render(request, 'partner/accessories.html', {'accessories':accessories})
-
-# class CustomerRegistrationView(View):
-#     def get(self, request):
-#         form = CustomerRegistrationForm()
-#         return render(request, 'partner/customerregistration.html', {'form':form})
-#     def post(self, request):
-#         form = CustomerRegistrationForm(request.POST)
-#         if form.is_valid():
-#             messages.success(request, 'Regitration Successfull !!')
-#             form.save()
-#         return render(request, 'partner/customerregistration.html', {'form':form})
-
-
-
-# def add_to_cart(request):
-#  return render(request, 'partner/addtocart.html')
-
-# def buy_now(request):
-#  return render(request, 'partner/buynow.html')
-
-# def profile(request):
-#  return render(request, 'partner/profile.html')
-
-# def address(request):
-#  return render(request, 'partner/address.html')
-
-# def orders(request):
-#  return render(request, 'partner/orders.html')
-
-# # def change_password(request):
-# #  return render(request, 'partner/changepassword.html')
-
-
-# # def login(request):
-# #  return render(request, 'partner/login.html')
-
-# # def customerregistration(request):
-# #  return render(request, 'partner/customerregistration.html')
-
-# def checkout(request):
-#  return render(request, 'partner/checkout.html')
+    def post(self, request):
+        fm = AddCouponsForm(request.POST or None, request.FILES or None)
+        if fm.is_valid():
+            messages.success(request, 'Product Added Successfully !!')
+            fm.save()
+        return render(request, 'partner/addcoupon.html', {'form':fm})

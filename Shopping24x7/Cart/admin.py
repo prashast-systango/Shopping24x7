@@ -14,6 +14,3 @@ class CartModelAdmin(admin.ModelAdmin):
 class CartItemModelAdmin(admin.ModelAdmin):
     list_display=['id', 'product_id', 'quantity', 'amount']
 
-# @admin.register(TimeStamp)
-# class CartItemModelAdmin(admin.ModelAdmin):
-#     list_display=['id', 'product_id', 'quantity', 'amount']

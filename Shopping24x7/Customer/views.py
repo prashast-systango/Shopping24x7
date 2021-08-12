@@ -1,4 +1,3 @@
-# pylint: disable=no-self-use
 from Customer.models import Customer
 from os import name, stat
 from django.shortcuts import render
@@ -6,18 +5,6 @@ from django.views import View
 from Customer.forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from Base.models import Product
-# from rest_framework.permissions import IsAuthenticated
-
-#     Customer,
-#     Product,
-#     Cart,
-#     OrderPlaced,
-#     Partner,
-#     Coupon,
-#     Employee,
-#     Attendance,
-#     Location
-# )
 
 class HomeView(View):
     def get(self, request):

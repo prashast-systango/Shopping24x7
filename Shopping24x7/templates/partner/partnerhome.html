@@ -78,16 +78,12 @@
     {% block livesale %} {% endblock livesale %}
     {% block main-content %} 
      <div class="card" style="margin:auto; width:25rem; top: 30px;">
-      <button class="btn btn-success" type="button">
-         <a href="{% url 'product-add' %}" class="text-white" style="text-decoration:none;">Add Product</a>
-      </button><br>
-       <button class="btn btn-success" type="button">
-         <a href="{% url 'employee-add' %}" class="text-white" style="text-decoration:none;">Add Employee</a>
-      </button><br>
-      <button class="btn btn-success" type="button">Add an Employee</button><br>
-      <button class="btn btn-success" type="button">Manage Employees</button><br>
-      <button class="btn btn-success" type="button">Add Coupon</button><br>
-      <button class="btn btn-success" type="button">Manage Coupons</button>
+      <a href="{% url 'product-add' %}" class="btn btn-success">Add Product</a><br>
+      <a href="{% url 'employee-add' %}" class="btn btn-success">Add Employee</a><br>
+      <a href="{% url 'products-all' %}" class="btn btn-success">Manage Products</a><br>
+      <a href="{% url 'employees-all' %}" class="btn btn-success">Manage Employees</a><br>
+      <a href="{% url 'coupon-add' %}" class="btn btn-success">Add Coupon</a><br>
+      <a href="{% url 'coupons-all' %}" class="btn btn-success">Manage Coupons</a><br>
      </div>
     {% endblock main-content %}
 

@@ -7,7 +7,7 @@ from Shopping24x7.utils import TimeStamp
 from constants import *
 
 
-class Cart(models.Model):
+class Cart(TimeStamp):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
