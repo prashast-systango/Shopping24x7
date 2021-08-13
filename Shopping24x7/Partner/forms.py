@@ -20,15 +20,16 @@ class CreateEmployeeForm(UserCreationForm):
         widgets = {'username': forms.TextInput(attrs={'class':'form-control'})}
      
 class AddProductsForm(forms.ModelForm):
-    title = forms.CharField()
-    selling_price = forms.FloatField()
-    description = forms.CharField()
-    brand = forms.CharField()
-    category = forms.ChoiceField(choices= CATEGORY_CHOICES)
-    product_image = forms.ImageField()
+    title = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'id':'titleid'}))
+    selling_price = forms.FloatField(widget=forms.NumberInput(attrs={'class':'form-control', 'id':'sellingpriceid'}))
+    description = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'id':'descriptionid'}))
+    brand = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'id':'brandid'}))
+    category = forms.ChoiceField(choices= CATEGORY_CHOICES, widget=forms.Select(attrs={'class':'form-control', 'id':'categoryid'}))
+    product_image = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class':'form-control', 'id':'productimageid'}))
     class Meta:
         model = Product
         fields = ['title', 'selling_price', 'description', 'brand', 'category', 'product_image']
+        
 
 
 class AddCouponsForm(forms.ModelForm):

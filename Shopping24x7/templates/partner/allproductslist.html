@@ -78,6 +78,7 @@
     {% block banner_slider %} {% endblock banner_slider %}
     {% block livesale %} {% endblock livesale %}
     {% block main-content %}
+     
         <div class="col-sm-8" style="margin:auto;">
             <h4 class="text-center alert bg-success text-white" style="top:30px;">All Products</h4>
             {% if item %}
@@ -113,7 +114,9 @@
             {% else%}
             <h4 class="text-center bg-dark text-white">No Records Found</h4>
             {% endif %}
-        </div>
+      
+      </div>
+        
     {% endblock main-content %}
 
     <!-- Start Footer -->
@@ -130,5 +133,7 @@
     <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'app/js/all.min.js' %}"></script>
     <script src="{% static 'app/js/myscript.js' %}"></script>
+    <script src="{% static 'app/js/jquery.js' %}"></script>
+    <script src="{% static 'app/js/popper.js' %}"></script>
   </body>
 </html>

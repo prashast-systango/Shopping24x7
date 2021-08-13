@@ -50,8 +50,8 @@
  <!-- Slider 1 -->
  <div class="owl-carousel" id="slider1">
   {% for a in accessories %}
-  <a href="{% url 'product-detail' a.id%}" class="btn"><div class="item">
-  <img src="{{ a.product_image.url}}" alt="" height="200px"><br>
+  <a href="{% url 'product-detail' a.id %}" class="btn"><div class="item">
+  <img src="{{ a.product_image.url }}" alt="" height="200px"><br>
   <span class="fw-bold">{{ a.title }}</span><br><span class="fs-5">Rs. {{ a.selling_price }}
   </span></div></a>
   {% endfor %}

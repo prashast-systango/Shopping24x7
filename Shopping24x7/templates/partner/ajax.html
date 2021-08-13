@@ -1,0 +1,39 @@
+<script>
+    $("#btnproductupload").click(function(){
+        output="";
+        let title = $("#titleid").val();
+        let selling_price = $("#sellingpriceid").val();
+        let description = $("#descriptionid").val();
+        let brand = $("#brandid").val();
+        let category = $("#categoryid").val();
+        let product_image = $("#productimageid").val();
+        let csr = $("input[name=csrfmiddlewaretoken]").val();
+        mydata={
+            title:title,
+            selling_price:selling_price,
+            description:description,
+            brand:brand,
+            category:category,
+            product_image:product_image,
+            csrfmiddlewaretoken:csr,
+        };
+            $.ajax({
+                url: "{% url 'product-save' %}",
+                method: "POST",
+                data: mydata,
+                success: function(data){
+                    x=data.product_data;
+                    if(data.status == "Saved"){
+                        for(i=0; i<x.length; i++){
+                            output += "<tr><td>" + x[i].id + "</td><td>" + x[i].title + "</td><td>" + x[i].selling_price + "</td><td>" + x[i].description + "</td><td>" + x[i].brand + "</td><td>" + x[i].category + "</td><td> <a href='{% url 'products-edit' " + x[i].id +"%}' class='btn btn-warning btn-sm'>Edit</a> <a href='{% url 'products-delete' " + x[i].id + "%}' class='btn btn-danger btn-sm'>Delete</a>"
+                        }
+                        $("#tbody").html(output);
+                        $("form")[0].reset();
+                    }
+                    if(data.status==0){
+
+                    }
+                },
+            });
+    })
+</script>

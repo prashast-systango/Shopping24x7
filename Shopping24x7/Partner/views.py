@@ -3,7 +3,7 @@ from django.views import View
 from .forms import AddProductsForm, CreateEmployeeForm, ProductsForm, EmployeesForm, AddCouponsForm
 from django.contrib import messages
 from rest_framework import request
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from Base.models import Product
 from Employee.models import Employee
 from .models import Coupon
@@ -62,6 +62,7 @@ def deleteProduct(request, pk):
     context = {'item':prod}
     return render(request, 'partner/deleteproduct.html', context)
 
+
 class AddEmployeeView(View):
     def get(self, request):
         fm = CreateEmployeeForm()
@@ -109,3 +110,48 @@ class AddCouponsView(View):
             messages.success(request, 'Product Added Successfully !!')
             fm.save()
         return render(request, 'partner/addcoupon.html', {'form':fm})
+
+# manage products using AJAX
+
+def manageProduct(request):
+    if request.method == "POST":
+        form = AddProductsForm(request.POST)
+        if form.is_valid():
+            title= request.POST['title']
+            selling_price= request.POST['selling_price']
+            description= request.POST['description']
+            brand= request.POST['brand']
+            category= request.POST['category']
+            product_image= request.POST['product_image']
+            prod = Product(title=title, selling_price=selling_price, description=description, brand=brand, category=category, product_image=product_image)
+            prod.save()
+            temp = Product.objects.values()
+            product_data = list(temp) 
+            return JsonResponse({'status':'Saved', 'product_data':product_data})
+        else:
+            return JsonResponse({'status':0})       
+    else:
+        fm = AddProductsForm()
+        prod = Product.objects.all()
+        return render(request, 'partner/manageproducts.html', {'form':fm, 'item':prod})
+        
+
+
+
+def saveProductData(request):
+    if request.method=="POST":
+        form = AddProductsForm(request.POST)
+        if form.is_valid():
+            title= request.POST['title']
+            selling_price= request.POST['selling_price']
+            description= request.POST['description']
+            brand= request.POST['brand']
+            category= request.POST['category']
+            product_image= request.POST['product_image']
+            prod = Product(title=title, selling_price=selling_price, description=description, brand=brand, category=category, product_image=product_image)
+            prod.save()
+            temp = Product.objects.values()
+            product_data =list(temp)
+            return JsonResponse({'status':'Saved', 'product_data':product_data})
+        else:
+            return JsonResponse({'status':0})

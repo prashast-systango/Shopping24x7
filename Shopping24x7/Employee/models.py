@@ -17,3 +17,8 @@ class Attendance(models.Model):
     check_out = models.DateTimeField()
     working_hours = models.TimeField()
     required_working_hours = models.TimeField()
+
+class AttendanceLog(models.Model):
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    
+

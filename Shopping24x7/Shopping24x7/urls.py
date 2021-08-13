@@ -66,6 +66,11 @@ urlpatterns = [
     # products delete form url
     path('delete_employee/<str:pk>/', partnerViews.deleteEmployee, name='employees-delete'),
 
+    # manage all in one for product AJAX
+    path('manage_product/', partnerViews.manageProduct, name='product-manage'),
+    
+    # manage all in one for product AJAX
+    path('save_product/', partnerViews.saveProductData, name='product-save'),
 
     # add coupons url
     path('add_coupon/', partnerViews.AddCouponsView.as_view(), name='coupon-add'),
@@ -78,6 +83,8 @@ urlpatterns = [
     path('laptop/<slug:data>', customerViews.LaptopView.as_view(), name='laptopdata'),
     
     path('accessories/', customerViews.AccessoryView.as_view(), name='accessories'),
+    path('accessories/<slug:data>', customerViews.AccessoryView.as_view(), name='accessoriesdata'),
+
 
     path('cart/', customerViews.add_to_cart, name='add-to-cart'),
     path('buy/', customerViews.buy_now, name='buy-now'),

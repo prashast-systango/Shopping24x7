@@ -117,31 +117,3 @@
     <script src="{% static 'app/js/myscript.js' %}"></script>
   </body>
 </html>
-
-
-
-
-
-{% comment %} {% extends 'base/base.html' %}
-{% load static %}
-{% block title %}Add-Products{% endblock title %}
-{% block main-content %} {% endcomment %}
-{% comment %} <!DOCTYPE html>
-<html>
-    <body>
-        <br>
-        <form action="" method="POST"  class="shadow p-5 bg-dark text-white" style="border-radius: 30px;">
-            {% csrf_token %}
-            {% for temp in form %}
-                <div class="form-group mb-3">
-                    {{temp.label_tag}} {{temp}} <small class="text-danger">
-                    {{temp.errors|striptags}}
-                    </small>
-                </div>
-            {% endfor %}
-        
-            <input type="submit" value="Submit">
-        </form>
-    </body>
-</html> {% endcomment %}
-{% comment %} {% endblock main-content %} {% endcomment %}

@@ -78,42 +78,60 @@
     {% block banner_slider %} {% endblock banner_slider %}
     {% block livesale %} {% endblock livesale %}
     {% block main-content %}
-        <div class="col-sm-8" style="margin:auto;">
-            <h4 class="text-center alert bg-success text-white" style="top:30px;">All Employees</h4>
-            {% if item %}
-             <table class="table table-dark table-hover">
+      <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-sm-4">
+              <h6 class="alert alert-primary text-center text-success ">Add a product</h6>
+              <form action="" method="POST"  enctype="multipart/form-data" class="shadow p-5 bg-dark text-white" style="border-radius: 10px;">
+                {% csrf_token %}
+                {% for temp in form %}
+                    <div class="form-group mb-3">
+                        {{temp.label_tag}} {{temp}} <small class="text-danger">
+                        {{temp.errors|striptags}}
+                        </small>
+                    </div>
+                {% endfor %}
+                <input type="submit" class="btn btn-success" value="Submit" id="btnproductupload"/>
+              </form>
+            </div>
+            <div class="col-sm-8">
+              <h6 class="alert alert-primary text-center text-success ">All products</h6>
+              {% if item %}
+               <table class="table table-dark table-hover" style="border-radius: 10px;">
                 <thead>
                     <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Salary</th>
-                    <th scope="col">Bank</th>
-                    <th scope="col">Bank Acc. No.</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Selling Price</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody">
                 {% for temp in item %}
                     <tr>
                         <th scope="row">{{temp.id}}</th>
-                        <td>{{temp.employee_name}}</td>
-                        <td>{{temp.department}}</td>
-                        <td>{{temp.salary}}</td>
-                        <td>{{temp.bank}}</td>
-                        <td>{{temp.bank_account}}</td>
+                        <td>{{temp.title}}</td>
+                        <td>{{temp.selling_price}}</td>
+                        <td>{{temp.description}}</td>
+                        <td>{{temp.brand}}</td>
+                        <td>{{temp.category}}</td>
                         <td>
-                            <a href="{% url 'employees-edit' temp.id %}" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="{% url 'employees-delete' temp.id %}" class="btn btn-danger btn-sm">Delete</a>  
+                            <a href="{% url 'products-edit' temp.id %}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{% url 'products-delete' temp.id %}" class="btn btn-danger btn-sm">Delete</a>  
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
-             </table>
-            {% else%}
-            <h4 class="text-center bg-dark text-white">No Records Found</h4>
-            {% endif %}
+               </table>
+              {% else%}
+              <h4 class="text-center bg-dark text-white">No Records Found</h4>
+              {% endif %}
+            </div>
         </div>
+      </div>
     {% endblock main-content %}
 
     <!-- Start Footer -->
@@ -132,5 +150,7 @@
     <script src="{% static 'app/js/myscript.js' %}"></script>
     <script src="{% static 'app/js/jquery.js' %}"></script>
     <script src="{% static 'app/js/popper.js' %}"></script>
+    {% include "partner/ajax.html" %}
   </body>
 </html>
+
