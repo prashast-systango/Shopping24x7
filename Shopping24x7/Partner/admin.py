@@ -8,7 +8,7 @@ from .models import (
 
 @admin.register(Partner)
 class PartnerModelAdmin(admin.ModelAdmin):
-    list_display = ['id','user','partner_name']
+    list_display = ['id','user','email','partner_name']
 
 @admin.register(Coupon)
 class CouponModelAdmin(admin.ModelAdmin):

@@ -83,7 +83,7 @@
       <div class="col-sm-6 offset-sm-3">
         <h2 class="text-center text-success">Add a product</h2>
         <hr>
-        <form action="" method="POST"  enctype="multipart/form-data" class="shadow p-5 bg-dark text-white" style="border-radius: 10px;">
+        <form action="" method="POST" id="addprodform" enctype="multipart/form-data" class="shadow p-5 bg-dark text-white" style="border-radius: 10px;">
             {% csrf_token %}
             {% for temp in form %}
                 <div class="form-group mb-3">

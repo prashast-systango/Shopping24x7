@@ -7,7 +7,7 @@ from .models import (
 
 @admin.register(Employee)
 class EmployeeModelAdmin(admin.ModelAdmin):
-    list_display = ['id','employee_name','department','salary','bank','bank_account']
+    list_display = ['id','employee_name','email','department','salary','bank','bank_account']
 
 @admin.register(Attendance)
 class AttendanceModelAdmin(admin.ModelAdmin):

@@ -9,6 +9,7 @@ from Customer.models import Customer
 
 class Partner(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    email = models.EmailField(max_length=300)
     partner_name = models.CharField(max_length=200)
 
 class Coupon(models.Model):

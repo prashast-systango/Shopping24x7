@@ -34,6 +34,8 @@ class AddProductsView(View):
 
     def post(self, request):
         fm = AddProductsForm(request.POST or None, request.FILES or None)
+        print(fm)
+        print(fm.data)
         if fm.is_valid():
             messages.success(request, 'Product Added Successfully !!')
             fm.save()
@@ -113,34 +115,65 @@ class AddCouponsView(View):
 
 # manage products using AJAX
 
-def manageProduct(request):
-    if request.method == "POST":
-        form = AddProductsForm(request.POST)
-        if form.is_valid():
-            title= request.POST['title']
-            selling_price= request.POST['selling_price']
-            description= request.POST['description']
-            brand= request.POST['brand']
-            category= request.POST['category']
-            product_image= request.POST['product_image']
-            prod = Product(title=title, selling_price=selling_price, description=description, brand=brand, category=category, product_image=product_image)
-            prod.save()
-            temp = Product.objects.values()
-            product_data = list(temp) 
-            return JsonResponse({'status':'Saved', 'product_data':product_data})
-        else:
-            return JsonResponse({'status':0})       
-    else:
+class ManageProduct(View):
+    def get(self, request):
         fm = AddProductsForm()
         prod = Product.objects.all()
         return render(request, 'partner/manageproducts.html', {'form':fm, 'item':prod})
-        
 
+    def post(self, request):
+        fm = AddProductsForm(request.POST or None, request.FILES or None)
+        print(fm)
+        print(fm.data)
+        if fm.is_valid():
+            messages.success(request, 'Product Added Successfully !!')
+            fm.save()
+        return render(request, 'partner/manageproducts.html', {'form':fm, 'item':prod})
+
+
+
+#     if request.method == "POST":
+    #     form = AddProductsForm(request.POST)
+    #     if form.is_valid():
+    #         title= request.POST['title']
+    #         selling_price= request.POST['selling_price']
+    #         description= request.POST['description']
+    #         brand= request.POST['brand']
+    #         category= request.POST['category']
+    #         product_image= request.POST['product_image']
+    #         prod = Product(title=title, selling_price=selling_price, description=description, brand=brand, category=category, product_image=product_image)
+    #         prod.save()
+    #         temp = Product.objects.values()
+    #         product_data = list(temp) 
+    #         return JsonResponse({'status':'Saved', 'product_data':product_data})
+    #     else:
+    #         return JsonResponse({'status':0})       
+    # else:
+    #     fm = AddProductsForm()
+    #     prod = Product.objects.all()
+    #     return render(request, 'partner/manageproducts.html', {'form':fm, 'item':prod})
+        
+# class AddProductsView(View):
+#     def get(self, request):
+#         fm = AddProductsForm()
+#         return render(request, 'partner/addproducts.html', {'form':fm})
+
+#     def post(self, request):
+#         fm = AddProductsForm(request.POST or None, request.FILES or None)
+#         print(fm)
+#         print(fm.data)
+#         if fm.is_valid():
+#             messages.success(request, 'Product Added Successfully !!')
+#             fm.save()
+#         return render(request, 'partner/addproducts.html', {'form':fm})
 
 
 def saveProductData(request):
     if request.method=="POST":
-        form = AddProductsForm(request.POST)
+
+        form = AddProductsForm(request.POST or None, request.FILES or None)
+        print(form)
+        print(form.data)
         if form.is_valid():
             title= request.POST['title']
             selling_price= request.POST['selling_price']

@@ -25,7 +25,7 @@ class AddProductsForm(forms.ModelForm):
     description = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'id':'descriptionid'}))
     brand = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'id':'brandid'}))
     category = forms.ChoiceField(choices= CATEGORY_CHOICES, widget=forms.Select(attrs={'class':'form-control', 'id':'categoryid'}))
-    product_image = forms.ImageField(widget=forms.ClearableFileInput(attrs={'class':'form-control', 'id':'productimageid'}))
+    product_image = forms.ImageField(widget=forms.FileInput(attrs={'class':'form-control', 'id':'productimageid', 'name':'img'}))
     class Meta:
         model = Product
         fields = ['title', 'selling_price', 'description', 'brand', 'category', 'product_image']

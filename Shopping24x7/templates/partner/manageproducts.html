@@ -82,7 +82,7 @@
         <div class="row">
             <div class="col-sm-4">
               <h6 class="alert alert-primary text-center text-success ">Add a product</h6>
-              <form action="" method="POST"  enctype="multipart/form-data" class="shadow p-5 bg-dark text-white" style="border-radius: 10px;">
+              <form action="" method="POST" enctype="multipart/form-data" class="shadow p-5 bg-dark text-white" style="border-radius: 10px;">
                 {% csrf_token %}
                 {% for temp in form %}
                     <div class="form-group mb-3">
@@ -91,7 +91,10 @@
                         </small>
                     </div>
                 {% endfor %}
+
                 <input type="submit" class="btn btn-success" value="Submit" id="btnproductupload"/>
+
+
               </form>
             </div>
             <div class="col-sm-8">
@@ -137,7 +140,7 @@
     <!-- Start Footer -->
     <footer class="container-fluid bg-dark text-center p-2 mt-5 footer">
         <small class="text-white">Copyright &copy; 2021 || Designed By Prashast || </small>
-        <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px">
+        {% comment %} <img src="{% static 'app/images/payment.png' %}" alt="" srcset="" class="img-fluid" height="2px"> {% endcomment %}
     </footer> <!-- End Footer -->
 
     <!-- Jquery -->
@@ -145,12 +148,15 @@
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
-    <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'app/js/all.min.js' %}"></script>
-    <script src="{% static 'app/js/myscript.js' %}"></script>
-    <script src="{% static 'app/js/jquery.js' %}"></script>
-    <script src="{% static 'app/js/popper.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/all.min.js' %}"></script>
+    <script src="{% static 'js/myscript.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+
     {% include "partner/ajax.html" %}
+    
+
   </body>
 </html>
 

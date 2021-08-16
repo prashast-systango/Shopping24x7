@@ -8,6 +8,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from Customer.forms import CustomerLoginForm, MyPasswordChangeForm
+from Base import views as baseviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -21,8 +22,11 @@ urlpatterns = [
     path('mobile/', customerViews.MobileView.as_view(), name='mobile'),
     
     # Customer Log-in 
-    path('accounts/login/', auth_views.LoginView.as_view(template_name='customer/login.html', authentication_form=CustomerLoginForm),
-     name='login'),
+    # path('accounts/login/', auth_views.LoginView.as_view(template_name='customer/login.html', authentication_form=CustomerLoginForm),
+    # name='login'),
+
+    # common login
+    path('accounts/login/', baseviews.CommonLoginView.as_view(), name='login'),
 
     # customer log-out
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
@@ -67,7 +71,7 @@ urlpatterns = [
     path('delete_employee/<str:pk>/', partnerViews.deleteEmployee, name='employees-delete'),
 
     # manage all in one for product AJAX
-    path('manage_product/', partnerViews.manageProduct, name='product-manage'),
+    path('manage_product/', partnerViews.ManageProduct.as_view(), name='product-manage'),
     
     # manage all in one for product AJAX
     path('save_product/', partnerViews.saveProductData, name='product-save'),

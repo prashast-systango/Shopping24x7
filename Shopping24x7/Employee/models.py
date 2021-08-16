@@ -4,6 +4,7 @@ from constants import *
 
 class Employee(models.Model):
     employee_name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=300)
     department = models.CharField(max_length=200)
     salary = models.IntegerField()
     bank = models.CharField(max_length=200, choices=BANK_CHOICES)  

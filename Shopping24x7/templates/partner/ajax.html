@@ -1,5 +1,17 @@
 <script>
+    {% comment %} document.getElementById("addprodform").onsubmit=function(){
+   
+   {% comment %} $.ajax(
+   {
+      url : "{% url 'product-save' %}",
+      method : "POST" ,
+      data : new FormData(addprodform),
+      processData: false,
+      contentType: false,
+   })
+};  {% endcomment %}
     $("#btnproductupload").click(function(){
+        console.log("i am in ajax");
         output="";
         let title = $("#titleid").val();
         let selling_price = $("#sellingpriceid").val();
@@ -8,14 +20,16 @@
         let category = $("#categoryid").val();
         let product_image = $("#productimageid").val();
         let csr = $("input[name=csrfmiddlewaretoken]").val();
+        let mydata = new FormData()
         mydata={
+            csrfmiddlewaretoken:csr,
             title:title,
             selling_price:selling_price,
             description:description,
             brand:brand,
             category:category,
             product_image:product_image,
-            csrfmiddlewaretoken:csr,
+            
         };
             $.ajax({
                 url: "{% url 'product-save' %}",

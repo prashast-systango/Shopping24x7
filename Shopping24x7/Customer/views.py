@@ -1,6 +1,6 @@
 from Customer.models import Customer
 from os import name, stat
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.views import View
 from Customer.forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
