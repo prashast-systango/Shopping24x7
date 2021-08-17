@@ -2,9 +2,10 @@ from Customer.models import Customer
 from os import name, stat
 from django.shortcuts import render, HttpResponse
 from django.views import View
-from Customer.forms import CustomerRegistrationForm, CustomerProfileForm
+from Customer.forms import CustomerRegistrationForm, CustomerProfileForm, AddEmailToCustomerTableForm
 from django.contrib import messages
 from Base.models import Product
+from Customer.models import CustomerEmails
 
 class HomeView(View):
     def get(self, request):
@@ -53,11 +54,14 @@ class CustomerRegistrationView(View):
         return render(request, 'customer/customerregistration.html', {'form':form})
     def post(self, request):
         form = CustomerRegistrationForm(request.POST)
+        email = request.POST.get('email')
+        # add_email = AddEmailToCustomerTableForm(email=email)
         if form.is_valid():
             messages.success(request, 'Regitration Successfull !!')
             form.save()
+            customer_email = CustomerEmails.objects.create(email=email)
+            # customer_email.save()
         return render(request, 'customer/customerregistration.html', {'form':form})
-
 
 class profileView(View):
     def get(self, request):

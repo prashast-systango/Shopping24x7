@@ -19,19 +19,25 @@ class CustomerRegistrationForm(UserCreationForm):
         return email
     password1 = forms.CharField(label='Password ', widget=forms.PasswordInput(attrs={'class':'form-control'}))
     password2 = forms.CharField(label='Confirm Password ', widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    email = forms.CharField(label='Email ',required=True, widget=forms.EmailInput(attrs={'class':'form-control'}))
+    email = forms.CharField(label='Email ',required=True, widget=forms.EmailInput(attrs={'class':'form-control', 'name':'email'}))
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
         labels = {'email': 'Email '}
         widgets = {'username': forms.TextInput(attrs={'class':'form-control'})}
 
+        # model = User
+        # fields = ['username', 'email', 'password1', 'password2']
+        # labels = {'email': 'Email '}
+        # widgets = {'username': forms.TextInput(attrs={'class':'form-control'})}
+
 class CustomerLoginForm(AuthenticationForm):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'autofocus':True, 'class':'form-control'}))
-    password = forms.CharField(label=_("Password"), strip=False, widget=forms.PasswordInput(attrs={'authcomplete':'current-password', 'class':'form-control'}))
+    username = UsernameField(widget=forms.TextInput(attrs={'autofocus':True, 'class':'form-control', 'name':'username'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'autofocus':True, 'class':'form-control', 'name':'email'}))
+    password = forms.CharField(label=_("Password"), strip=False, widget=forms.PasswordInput(attrs={'authcomplete':'current-password', 'class':'form-control', 'name':'password'}))
     class Meta:
         model = User
-        fields = ['email', 'password']  
+        fields = ['username', 'email', 'password']  
         
 class MyPasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(label=_("Old Password"), strip=False, widget=forms.PasswordInput(attrs={'autocomplete':'current-password', 'autofocus':True, 'class':'form-control'}))
@@ -48,3 +54,7 @@ class CustomerProfileForm(forms.ModelForm):
         'state':forms.Select(attrs={'class':'form-control'}),
         'zipcode':forms.NumberInput(attrs={'class':'form-control'})}
      
+class AddEmailToCustomerTableForm(forms.Form):
+    class Meta:
+        model = Customer
+        fields = ['email']

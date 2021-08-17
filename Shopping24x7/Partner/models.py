@@ -12,6 +12,10 @@ class Partner(models.Model):
     email = models.EmailField(max_length=300)
     partner_name = models.CharField(max_length=200)
 
+class PartnerEmails(models.Model):
+    email = models.EmailField(max_length=300)
+
+
 class Coupon(models.Model):
     coupon_partner = models.ForeignKey(Partner, on_delete=models.CASCADE)
     coupon_name = models.CharField(max_length=200)

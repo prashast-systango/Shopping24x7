@@ -9,7 +9,7 @@
    <hr>
    <form action="" method="post" novalidate class="shadow p-5 bg-dark text-white" style="border-radius: 30px;">
         {% csrf_token %}
-
+{% comment %} 
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label text-danger">Email address</label>
             <input type="email" class="form-control"  name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -18,16 +18,16 @@
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label text-danger">Password</label>
             <input type="password" class="form-control" name="password" id="exampleInputPassword1">
-        </div>
+        </div> {% endcomment %}
 
-        {% comment %} {% for fm in form %}
+        {% for fm in form %}
 
             <div class="form-group">
                 {{fm.label_tag}} {{fm}} <small class="text-danger">
                     {{fm.errors|striptags}}
                 </small><br>
             </div>
-        {% endfor %} {% endcomment %}
+        {% endfor %}
         <small><a href="{% url 'changepassword' %}" class="text-danger">Forgot Password ?</a></small><br><br>
         <input type="submit" class="btn btn-danger fw-bold text-dark" value="Login">
         <br>

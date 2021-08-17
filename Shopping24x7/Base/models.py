@@ -1,6 +1,15 @@
+# django imports
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
+
+# local imports
 from constants import *
-# Create your models here.
+
+class MyUser(AbstractBaseUser):
+    email = models.EmailField(verbose_name='email', max_length=300, unique=True)
+    USERNAME_FIELD ='email'
+    
+
 class Product(models.Model):
     title = models.CharField(max_length=100)
     selling_price = models.FloatField()
@@ -11,3 +20,4 @@ class Product(models.Model):
 
     def __str__(self):
         return str(self.id)
+

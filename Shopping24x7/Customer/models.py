@@ -13,6 +13,6 @@ class Customer(models.Model):
     city = models.CharField(max_length=50)
     zipcode = models.IntegerField()
     state = models.CharField(max_length=50, choices=STATE_CHOICES)
-
-
     
+class CustomerEmails(models.Model):
+    email = models.EmailField(max_length=300)

@@ -4,11 +4,17 @@ from .models import (
     Coupon,
     Location,
     Payroll,
+    PartnerEmails,
 )
 
 @admin.register(Partner)
 class PartnerModelAdmin(admin.ModelAdmin):
     list_display = ['id','user','email','partner_name']
+
+@admin.register(PartnerEmails)
+class PartnerEmailsModelAdmin(admin.ModelAdmin):
+    list_display = ['email']
+
 
 @admin.register(Coupon)
 class CouponModelAdmin(admin.ModelAdmin):
