@@ -22,4 +22,5 @@ class Attendance(models.Model):
 class AttendanceLog(models.Model):
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     
-
+class EmployeeEmails(models.Model):
+    email = models.EmailField(max_length=300)

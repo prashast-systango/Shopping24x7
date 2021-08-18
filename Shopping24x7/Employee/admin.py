@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import (
     Employee,
-    Attendance
+    Attendance,
+    EmployeeEmails
 )
 # Register your models here.
 
@@ -12,3 +13,7 @@ class EmployeeModelAdmin(admin.ModelAdmin):
 @admin.register(Attendance)
 class AttendanceModelAdmin(admin.ModelAdmin):
     list_display = ['id','employee','date','check_in','check_out','working_hours']
+
+@admin.register(EmployeeEmails)
+class CustomerEmailsModelAdmin(admin.ModelAdmin):
+    list_display = ['email']

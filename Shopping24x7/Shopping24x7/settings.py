@@ -94,9 +94,9 @@ WSGI_APPLICATION = 'Shopping24x7.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'shopping24x7db',
         'USER': 'postgres',
-        'PASSWORD': 'jainisha56?',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '5432',
     }
