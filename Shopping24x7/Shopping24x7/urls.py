@@ -9,6 +9,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from Customer.forms import CustomerLoginForm, MyPasswordChangeForm
+from Employee.forms import EmployeePasswordChangeForm
 from Base import views as baseviews
 
 urlpatterns = [
@@ -87,6 +88,8 @@ urlpatterns = [
     # all employees list
     path('all_coupons/', partnerViews.CouponListView.as_view(), name='coupons-all'),
 
+
+
     # EMPLOYEE SIDE URLs
     # path('employee_login', employeeViews.EmployeeLoginView.as_view(), name='employee-login')
 
@@ -95,6 +98,13 @@ urlpatterns = [
 
     # employee profile
     path('employee_profile', employeeViews.EmployeeProfileView.as_view(), name="employee-profile"),
+
+    path('employeepasswordchange/', auth_views.PasswordChangeView.as_view(template_name='employee/passwordchange.html',
+    form_class=EmployeePasswordChangeForm, success_url='/employeepasswordchangedone/'), name='employeechangepassword'),
+
+    path('employeepasswordchangedone/', auth_views.PasswordChangeView.as_view(template_name='employee/passwordchangedone.html'), name='employeepasswordchangedone'),
+
+
 
     path('laptop/', customerViews.LaptopView.as_view(), name='laptop'),
     path('laptop/<slug:data>', customerViews.LaptopView.as_view(), name='laptopdata'),

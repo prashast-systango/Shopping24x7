@@ -1,7 +1,7 @@
 <script>
-    {% comment %} document.getElementById("addprodform").onsubmit=function(){
+    document.getElementById("addprodform").onsubmit=function(){
    
-   {% comment %} $.ajax(
+    $.ajax(
    {
       url : "{% url 'product-save' %}",
       method : "POST" ,
@@ -9,7 +9,7 @@
       processData: false,
       contentType: false,
    })
-};  {% endcomment %}
+};  
     $("#btnproductupload").click(function(){
         console.log("i am in ajax");
         output="";
